@@ -10,12 +10,22 @@ const app = express();
 const port = 3000;
 
 app.use(express.json());
+app.set('view engine', 'ejs');
+app.use(express.static('public'));
 
-app.get ('/', async (_req, res) => {
+
+// Home Route
+app.get('/', (_req, res) => {
+    res.render('index.ejs');
+});
+
+
+// Prices Route
+app.get ('/prices', async (_req, res) => {
     try {
         const response = await axios.get( process.env.API_URL + '/tickers');
         const result = response.data;
-        res.render('index.ejs', { 
+        res.render('prices.ejs', { 
             coins: result,
         });
     } catch (error) {
@@ -23,6 +33,8 @@ app.get ('/', async (_req, res) => {
     }
 });
 
+
+// Start the server
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });
