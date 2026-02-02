@@ -3,9 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>PAPI - Cryptocurrency Prices</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="/public/styles.css">
 </head>
 <body>
 
+    <h1>Welcome to PAPI</h1>
+    <h2>Cryptocurrency Prices</h2>
+    <ul>
+        <% if(locals.coins && locals.coins.length > 0) { %>
+        <% locals.coins.forEach(coin => { %>
+            <li><strong><%= coin.name %> (<%= coin.symbol %>)</strong>: $<%= (coin.quotes.USD.price).toFixed(3) %></li>
+        <% }); %>
+        <% } else { %>
+            <li>No coin data available.</li>
+        <% } %>
+
+        <% if(locals.error) { %>
+            <li>Error: <%= locals.error.message %></li>
+        <% } %>
+    </ul>
+    
 </body>
 </html>
