@@ -1,10 +1,13 @@
 # PREX
-Real-Time Crypto Price Tracker which helps you Monitor cryptocurrency prices live and stay ahead of the market.
+Real-time crypto price tracker built with Express and EJS. It pulls market data from CoinGecko, renders price cards, and shows a 7-day chart for a single coin.
 
 ## Features
-- Node.js + Express
-- EJS templates (views/header.ejs, views/footer.ejs, views/index.ejs, views/prices.ejs)
-- Static assets in `public/` (images, styles/main.css)
+- Node.js + Express + Axios
+- EJS views with partials
+- 7-day sparkline charts for coins
+- Coin search by id (e.g., `bitcoin`, `ethereum`)
+- Server refreshes market data every 30 minutes
+- Static assets in `public/` (images, styles)
 - Environment configuration via `.env`
 
 ## Prerequisites
@@ -16,9 +19,11 @@ Real-Time Crypto Price Tracker which helps you Monitor cryptocurrency prices liv
 ```bash
 npm install
 ```
-2. Create a `.env` file (optional)
-```
+2. Create a `.env` file
+```bash
 PORT=3000
+COINGECKO_URL=https://api.coingecko.com/api/v3
+API_KEY=your_demo_or_pro_key
 ```
 3. Start the app
 ```bash
@@ -28,28 +33,36 @@ node index.js
 ```
 4. Open http://localhost:3000 (or the port you set)
 
+## Routes
+- `GET /` Home page
+- `GET /prices` Market list (top 12 by market cap)
+- `GET /search?query=coin-id` Single coin chart (7 days)
+
 ## Project structure
 ```
 .
-├─ .env
-├─ .gitignore
-├─ index.js
-├─ package.json
-├─ README.md
-├─ public/
-│  ├─ images/
-│  └─ styles/
-│     └─ main.css
-└─ views/
-    ├─ header.ejs
-    ├─ footer.ejs
-    ├─ index.ejs
-    └─ prices.ejs
+|-- .env
+|-- .gitignore
+|-- index.js
+|-- package.json
+|-- README.md
+|-- public/
+|   |-- images/
+|   |-- styles/
+|       |-- main.css
+|       |-- coin.css
+|-- views/
+|   |-- index.ejs
+|   |-- prices.ejs
+|   |-- coin.ejs
+|   |-- partials/
+|       |-- header.ejs
+|       |-- footer.ejs
 ```
 
 ## Notes
-- Check `package.json` for available npm scripts (e.g., `start`, `dev`).
-- Add environment variables to `.env` as needed.
+- CoinGecko rate limits apply; use an API key if required.
+- Check `package.json` for available npm scripts.
 
 ## Contributing
 Submit issues or pull requests. Keep changes focused and include tests where appropriate.
