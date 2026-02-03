@@ -9,8 +9,12 @@ dotenv.config({
 });
 
 const app = express();
-const appFile = fileURLToPath(import.meta.url);
-const appDir = path.dirname(appFile);
+let appDir = process.cwd();
+if (typeof __dirname !== 'undefined') {
+    appDir = __dirname;
+} else if (import.meta && import.meta.url) {
+    appDir = path.dirname(fileURLToPath(import.meta.url));
+}
 
 app.use(express.json());
 app.set('view engine', 'ejs');
