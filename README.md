@@ -64,5 +64,16 @@ node index.js
 - CoinGecko rate limits apply; use an API key if required.
 - Check `package.json` for available npm scripts.
 
+## Netlify Env Vars
+Netlify does not read your local `.env` file in production. Set these in the Netlify UI or CLI so Functions can access them at runtime:
+- `COINGECKO_URL` = `https://api.coingecko.com/api/v3`
+- `API_KEY` = your CoinGecko key
+
+CLI example:
+```bash
+netlify env:set COINGECKO_URL https://api.coingecko.com/api/v3
+netlify env:set API_KEY your_demo_or_pro_key
+```
+
 ## Contributing
 Submit issues or pull requests. Keep changes focused and include tests where appropriate.
