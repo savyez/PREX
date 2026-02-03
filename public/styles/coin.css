@@ -1,0 +1,18 @@
+html, body { 
+    height: 100%; 
+}
+body { 
+    overflow: hidden; 
+}
+.navbar { 
+    margin-top: 0 !important; 
+}
+.coin-layout { 
+    min-height: calc(100vh - 88px); 
+}
+.coin-card { 
+    width: 92vw; max-width: 1200px; 
+}
+.coin-chart { 
+    height: 68vh; max-height: 600px; 
+}

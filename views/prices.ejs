@@ -29,21 +29,28 @@
         </div>
     </nav>
     <br>
-    <ul class="d-flex flex-wrap list-unstyled justify-content-center">
+    <ul class="d-flex flex-wrap list-unstyled justify-content-center vh-100">
         <% if(locals.coins && locals.coins.length > 0) { %>
         <% locals.coins.forEach(coin => { %>
-        <li class="list-group-item mb-4 p-3 mx-2">
+        <li class="list-group-item mb-3 p-2 mx-2">
             <div class="col d-flex justify-content-start"> 
                 <div class="card shadow-sm"> 
-                    <svg aria-label="Placeholder: Thumbnail" class="bd-placeholder-img card-img-top" height="225" preserveAspectRatio="xMidYMid slice" role="img" width="100%" xmlns="http://www.w3.org/2000/svg"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> 
+                    <svg class="card-img-top" viewBox="0 0 300 120" role="img" aria-label="Last 7 Days" preserveAspectRatio="xMidYMid slice" width="100%" height="140" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="300" height="120" fill="#0f141a"></rect>
+                        <text x="150" y="18" text-anchor="middle" fill="#e6eef6" font-size="12" font-family="system-ui, -apple-system, Segoe UI, sans-serif">Last 7 Days</text>
+                        <% if (coin.sparklinePoints) { %>
+                            <polyline fill="none" stroke="<%= coin.sparklineUp ? '#21c45a' : '#ff3b3b' %>" stroke-width="2" points="<%= coin.sparklinePoints %>"></polyline>
+                        <% } else { %>
+                            <text x="150" y="70" text-anchor="middle" fill="#98a6b3" font-size="12" font-family="system-ui, -apple-system, Segoe UI, sans-serif">No data</text>
+                        <% } %>
+                    </svg>
                     <div class="card-body"> 
                         <p class="card-text"><strong><%= coin.symbol.toUpperCase() %></strong>: $<%= (coin.current_price).toFixed(3) %></p> 
                         <div class="d-flex justify-content-between align-items-center"> 
                             <div class="btn-group"> 
-                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button> 
-                                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button> 
+                                <a href="/search?query=<%= coin.id %>" class="btn btn-sm btn-outline-secondary">View</a> 
                             </div> 
-                            <small class="text-body-secondary">9 mins</small> 
+                            <small class="text-body-secondary"><%= new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' }) %></small> 
                         </div> 
                     </div> 
                 </div> 
